@@ -4,8 +4,8 @@ const menus = document.querySelectorAll(".menus button");
 menus.forEach(menu => menu.addEventListener("click", (event) => getNewsByCategory(event)));
 
 const getLatestNews = async () => {
-    //const url = new URL(`https://sh-times.netlify.app/top-headlines`);
-    const url = new URL(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`);
+    const url = new URL(`https://sh-times.netlify.app/top-headlines`);
+    //const url = new URL(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`);
     const response = await fetch(url);
     const data = await response.json();
     newsList = data.articles;
@@ -14,7 +14,7 @@ const getLatestNews = async () => {
 
 const getNewsByCategory = async (event) => {
     const category = event.target.textContent.toLowerCase();
-    const url = new URL(`https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`);
+    const url = new URL(`https://sh-times.netlify.app/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`);
     const response = await fetch(url);
     const data = await response.json();
     newsList = data.articles;
@@ -23,7 +23,7 @@ const getNewsByCategory = async (event) => {
 
 const getNewsByKeyword = async () => {
     const keyword = document.getElementById("search-input").value;
-    const url = new URL(`https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`);
+    const url = new URL(`https://sh-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`);
     const response = await fetch(url);
     const data = await response.json();
     newsList = data.articles;
