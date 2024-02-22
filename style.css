@@ -88,17 +88,17 @@
     .menus {
       display: none;
     }
-  }
+}
   
-  .search{
-      display: flex;
-  }
+.search{
+    display: flex;
+}
   
-  .side-menu-search{
-      margin-top: 1em;
-      display: flex;
-  }
+.side-menu-search{
+    margin-top: 1em;
+    display: flex;
+}
   
-  .side-menu-search i {
-      margin: 0.5em;
-  }
+.side-menu-search i {
+    margin: 0.5em;
+}
