@@ -80,3 +80,25 @@
 .hide{
     display: none;
 }
+
+@media screen and (max-width: 63rem) {
+    .hide {
+      display: inline;
+    }
+    .menus {
+      display: none;
+    }
+  }
+  
+  .search{
+      display: flex;
+  }
+  
+  .side-menu-search{
+      margin-top: 1em;
+      display: flex;
+  }
+  
+  .side-menu-search i {
+      margin: 0.5em;
+  }
