@@ -102,3 +102,7 @@
 .side-menu-search i {
     margin: 0.5em;
 }
+
+.side{
+    display: flex;
+}
