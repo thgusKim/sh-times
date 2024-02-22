@@ -1,27 +1,37 @@
-const API_KEY = `8ca46f5c8b624a54badf9b8ccc56354c`;
-let newsList = [];
-const getLatestNews = async () => {
-    const url = new URL(`https://sh-times.netlify.app/top-headlines`);
-    const response = await fetch(url);
-    const data = await response.json();
-    newsList = data.articles;
-    render();
-    console.log("ddd", newsList);
+.head-line {
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
 }
 
-const render = () => {
-    const newsHTML = newsList.map(news => `<div class="row news">
-    <div class="col-lg-4">
-        <img src="${news.urlToImage}">
-    </div>
-    <div class="col-lg-8">
-        <h2>${news.title}</h2>
-        <p>${news.description}</p>
-        <div>${news.source.name} * ${news.publishedAt}</div>
-    </div>
-</div>`).join('');
-
-    document.getElementById("news-board").innerHTML = newsHTML;
+.head-line svg {
+    width: 430px;
 }
 
-getLatestNews();
+.menus{
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px double black;
+}
+
+.menus button{
+    border: none;
+    background: none;
+    margin: 5px;
+}
+
+.menus button:hover{
+    background-color: beige;
+}
+
+.news-img-size{
+    max-width: 100%;
+    max-height: 250px;
+}
+
+.news{
+    border-bottom: 2px solid black;
+}
