@@ -4,8 +4,8 @@ const menus = document.querySelectorAll(".menus button");
 menus.forEach(menu => menu.addEventListener("click", (event) => getNewsByCategory(event)));
 
 const getLatestNews = async () => {
-    const url = new URL(`https://sh-times.netlify.app/top-headlines`);
-    //const url = new URL(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`);
+    //const url = new URL(`https://sh-times.netlify.app/top-headlines`);
+    const url = new URL(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`);
     const response = await fetch(url);
     const data = await response.json();
     newsList = data.articles;
@@ -14,7 +14,7 @@ const getLatestNews = async () => {
 
 const getNewsByCategory = async (event) => {
     const category = event.target.textContent.toLowerCase();
-    const url = new URL(`https://sh-times.netlify.app/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`);
+    const url = new URL(`https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`);
     const response = await fetch(url);
     const data = await response.json();
     newsList = data.articles;
@@ -23,7 +23,7 @@ const getNewsByCategory = async (event) => {
 
 const getNewsByKeyword = async () => {
     const keyword = document.getElementById("search-input").value;
-    const url = new URL(`https://sh-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`);
+    const url = new URL(`https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`);
     const response = await fetch(url);
     const data = await response.json();
     newsList = data.articles;
@@ -46,6 +46,14 @@ const render = () => {
 }
 
 getLatestNews();
+
+const openNav = () => {
+    document.getElementById("mySidenav").style.width = "250px";
+};
+
+const closeNav = () => {
+    document.getElementById("mySidenav").style.width = "0";
+};
 
 // 1. 버튼들에 클릭 이벤트 주기
 // 2. 카테고리별 뉴스 가져오기
