@@ -76,3 +76,7 @@
     background-color: beige;
     border-radius: 3px;
 }
+
+.hide{
+    display: none;
+}
