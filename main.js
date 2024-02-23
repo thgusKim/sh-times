@@ -2,32 +2,42 @@ const API_KEY = `8ca46f5c8b624a54badf9b8ccc56354c`;
 let newsList = [];
 const menus = document.querySelectorAll(".menus button");
 menus.forEach(menu => menu.addEventListener("click", (event) => getNewsByCategory(event)));
+let url = new URL(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`);
 
+const getNews = async () => {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (response.status === 200) {
+            if (data.articles.length === 0) {
+                throw new Error("No result for this search");
+            }
+            newsList = data.articles;
+            render();
+        } else {
+            throw new Error(data.message);
+        }
+    } catch (error) {
+        errorRender(error.message);
+    }
+
+}
 const getLatestNews = async () => {
-    const url = new URL(`https://sh-times.netlify.app/top-headlines`);
-    //const url = new URL(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`);
-    const response = await fetch(url);
-    const data = await response.json();
-    newsList = data.articles;
-    render();
+    //const url = new URL(`https://sh-times.netlify.app/top-headlines`);
+    url = new URL(`https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`);
+    getNews();
 }
 
 const getNewsByCategory = async (event) => {
     const category = event.target.textContent.toLowerCase();
-    const url = new URL(`https://sh-times.netlify.app/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`);
-    const response = await fetch(url);
-    const data = await response.json();
-    newsList = data.articles;
-    render();
+    url = new URL(`https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`);
+    getNews();
 }
 
 const getNewsByKeyword = async () => {
     const keyword = document.getElementById("search-input").value;
-    const url = new URL(`https://sh-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`);
-    const response = await fetch(url);
-    const data = await response.json();
-    newsList = data.articles;
-    render();
+    url = new URL(`https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`);
+    getNews();
 }
 
 const render = () => {
@@ -44,8 +54,6 @@ const render = () => {
 
     document.getElementById("news-board").innerHTML = newsHTML;
 }
-
-getLatestNews();
 
 const openNav = () => {
     document.getElementById("mySidenav").style.width = "250px";
@@ -64,6 +72,11 @@ const openSearchBox = () => {
     }
 };
 
-// 1. 버튼들에 클릭 이벤트 주기
-// 2. 카테고리별 뉴스 가져오기
-// 3. 뉴스 보여주기
+getLatestNews();
+
+const errorRender = (errorMessage) => {
+    const errorHTML = `<div class="alert alert-danger" role="alert">
+    ${errorMessage}
+  </div>`;
+    document.getElementById("news-board").innerHTML = errorHTML;
+}
