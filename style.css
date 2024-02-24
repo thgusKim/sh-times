@@ -108,3 +108,8 @@
   display: flex;
   margin-top: 1em;
 }
+
+.page-section{
+  display: flex;
+  justify-content: center;
+}
